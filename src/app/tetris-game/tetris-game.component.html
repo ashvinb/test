@@ -1,0 +1,43 @@
+<div class="tetris-container">
+  <h1>Angular Tetris</h1>
+  <div class="game-area">
+    <div class="tetris-board">
+      <!-- Render the static board cells -->
+      <div *ngFor="let row of board; let y = index" class="board-row">
+        <div *ngFor="let cell of row; let x = index" 
+             class="board-cell" 
+             [ngStyle]="getCellStyle(cell)">
+        </div>
+      </div>
+      <!-- Render the moving piece -->
+      <div *ngFor="let row of currentPiece.shape; let r = index">
+         <div *ngFor="let cell of row; let c = index">
+            <div *ngIf="cell" 
+                 class="piece-block" 
+                 [ngStyle]="getPieceBlockStyle(r, c)">
+            </div>
+        </div>
+      </div>
+       <!-- Game Over Overlay -->
+      <div *ngIf="isGameOver" class="game-over-overlay">
+        <div>
+          <h2>Game Over!</h2>
+          <p>Score: {{ score }}</p>
+          <button (click)="resetGame()">Play Again (R)</button>
+        </div>
+      </div>
+    </div>
+    <div class="game-info">
+      <h2>Score: {{ score }}</h2>
+      <h2>Level: {{ level }}</h2>
+      <h2>Lines: {{ linesCleared }}</h2>
+      <p>Controls:</p>
+      <ul>
+        <li>Arrows/WASD: Move & Rotate</li>
+        <li>Space: Hard Drop</li>
+        <li>R: Restart</li>
+      </ul>
+       <button (click)="resetGame()">Restart Game</button>
+    </div>
+  </div>
+</div>
